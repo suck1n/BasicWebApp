@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class QueryProcessor {
@@ -114,7 +115,8 @@ public class QueryProcessor {
                 return args.stream()
                         .map(String::trim)
                         .map(Integer::parseInt)
-                        .filter(this::isPrime).findFirst().orElse(-1) + "";
+                        .filter(this::isPrime)
+                        .map(n -> n + "").collect(Collectors.joining());
             } catch (Exception e) {
                 return "Invalid request: " + e.getMessage();
             }
