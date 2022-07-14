@@ -35,6 +35,16 @@ public class QueryProcessor {
             } catch (Exception e) {
                 return "Invalid request: " + e.getMessage();
             }
+        } else if (query.contains("multiplied ")) {
+            try {
+                List<String> args = List.of(query.split(" "));
+                int index = args.indexOf("multiplied by");
+                int num1 = Integer.parseInt(args.get(index-1));
+                int num2 = Integer.parseInt(args.get(index+1));
+                return num1 * num2 + "";
+            } catch (Exception e) {
+                return "Invalid request";
+            }
         } else {
             return "";
         }
