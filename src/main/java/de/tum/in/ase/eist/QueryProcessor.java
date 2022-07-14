@@ -2,6 +2,7 @@ package de.tum.in.ase.eist;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,25 +37,29 @@ public class QueryProcessor {
         } else if (query.contains("name")) {
            return "Mattia Leon";
         } else if (query.contains("minus")) {
-            try {
-                List<String> args = List.of(query.split(" "));
-                int index = args.indexOf("minus");
-                int num1 = Integer.parseInt(args.get(index-1));
-                int num2 = Integer.parseInt(args.get(index+1));
-                return num1 - num2 + "";
-            } catch (Exception e) {
-                return "Invalid request";
+            List<String> args = new ArrayList<>(List.of(query.split(" ")));
+            int index = args.indexOf("minus");
+            int result = Integer.parseInt(args.get(index-1));
+            args.remove(index);
+            while (args.contains("minus")) {
+                index = args.indexOf("minus");
+                result -= Integer.parseInt(args.get(index-1));
+                args.remove(index);
             }
+            result -= Integer.parseInt(args.get(index));
+            return result + "";
         } else if (query.contains("plus")) {
-            try {
-                List<String> args = List.of(query.split(" "));
-                int index = args.indexOf("plus");
-                int num1 = Integer.parseInt(args.get(index-1));
-                int num2 = Integer.parseInt(args.get(index+1));
-                return num1 + num2 + "";
-            } catch (Exception e) {
-                return "Invalid request";
+            List<String> args = new ArrayList<>(List.of(query.split(" ")));
+            int index = args.indexOf("plus");
+            int result = Integer.parseInt(args.get(index-1));
+            args.remove(index);
+            while (args.contains("plus")) {
+                index = args.indexOf("plus");
+                result += Integer.parseInt(args.get(index-1));
+                args.remove(index);
             }
+            result += Integer.parseInt(args.get(index));
+            return result + "";
         } else if (query.contains("largest")) {
             try {
                 List<String> args = List.of(query.split(":")[2].trim().split(","));
