@@ -23,6 +23,14 @@ class QueryProcessorTest {
 	}
 
 	@Test
+	void testSquareAndCube() {
+		String act = queryProcessor.process("5aa74350: which of the following numbers is both a square and a cube: 121, 521, 1444, 400");
+		if (!act.contains("121")) {
+			fail("Nope: " + act);
+		}
+	}
+
+	@Test
 	void testLargest() {
 		String act = queryProcessor.process("afcaaf80: which of the following numbers is the largest: 772, 382, 9, 97");
 		if (!act.contains("772")) {
