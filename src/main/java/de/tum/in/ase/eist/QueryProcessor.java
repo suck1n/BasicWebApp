@@ -45,6 +45,21 @@ public class QueryProcessor {
             } catch (Exception e) {
                 return "Invalid request";
             }
+        } else if (query.contains("square and a cube:")) {
+            try {
+                List<String> args = List.of(query.split("square and a cube:")[1].trim().split(","));
+                return args.stream()
+                        .map(String::trim)
+                        .map(Integer::parseInt)
+                        .filter(n -> {
+                            double number = n;
+                            double r = Math.sqrt(number);
+                            double p = Math.pow(number, 2);
+                            return Math.round(r)- r < 0.0000000000001 && Math.round(p) - p < 0.0000000000001;
+                        }).findFirst().orElse(-1) + "";
+            } catch (Exception e) {
+                return "Invalid request: " + e.getMessage();
+            }
         } else {
             return "";
         }
