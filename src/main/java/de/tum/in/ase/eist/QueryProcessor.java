@@ -92,9 +92,9 @@ public class QueryProcessor {
             }
         } else if (query.contains("banana")) {
             return "yellow";
-        } else if (query.contains("Eiffel tower")) {
+        } else if (query.contains("eiffel tower")) {
             return "paris";
-        } else if (query.contains("Fibonacci")) {
+        } else if (query.contains("fibonacci")) {
             try {
                 List<String> args = List.of(query.split(" "));
                 int index = args.indexOf("number");
@@ -113,6 +113,8 @@ public class QueryProcessor {
             } catch (Exception e) {
                 return "Invalid request: " + e.getMessage();
             }
+        } else if (query.contains("james bond")) {
+            return "Sean Connery";
         } else {
             return "";
         }
