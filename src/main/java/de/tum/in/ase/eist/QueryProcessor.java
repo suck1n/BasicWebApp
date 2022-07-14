@@ -27,12 +27,13 @@ public class QueryProcessor {
             }
         } else if (query.contains("largest")) {
             try {
-                List<String> args = List.of(query.split(":")[1].trim().split(", "));
+                List<String> args = List.of(query.split(":")[2].trim().split(","));
                 return args.stream()
+                        .map(String::trim)
                         .map(Integer::parseInt)
                         .max(Integer::compareTo) + "";
             } catch (Exception e) {
-                return "Invalid request";
+                return "Invalid request: " + e.getMessage();
             }
         } else {
             return "";
