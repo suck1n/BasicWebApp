@@ -60,6 +60,8 @@ public class QueryProcessor {
             } catch (Exception e) {
                 return "Invalid request: " + e.getMessage();
             }
+        } else if (query.contains("banana")) {
+            return "yellow";
         } else {
             return "";
         }

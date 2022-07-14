@@ -23,6 +23,14 @@ class QueryProcessorTest {
 	}
 
 	@Test
+	void testLargest() {
+		String act = queryProcessor.process("afcaaf80: which of the following numbers is the largest: 772, 382, 9, 97");
+		if (!act.contains("772")) {
+			fail("Got: " + act);
+		}
+	}
+
+	@Test
 	void isNotCaseSensitive() {
 		String actual = queryProcessor.process("shakespeare");
 		if (!actual.contains("playwright")) {
