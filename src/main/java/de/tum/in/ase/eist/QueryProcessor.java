@@ -14,6 +14,19 @@ public class QueryProcessor {
         return fibo(n-1) + fibo(n-2);
     }
 
+    private boolean isPrime(int n) {
+        if (n <= 1) {
+            return false;
+        }
+
+        for(int i = 2; i < Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public String process(String query) {
 		query = query.toLowerCase();
         if (query.contains("shakespeare")) {
@@ -85,10 +98,20 @@ public class QueryProcessor {
             try {
                 List<String> args = List.of(query.split(" "));
                 int index = args.indexOf("number");
-                int num1 = Integer.parseInt(args.get(index-1).replace("th", ""));
+                int num1 = Integer.parseInt(args.get(index - 1).replace("th", ""));
                 return fibo(num1) + "";
             } catch (Exception e) {
                 return "Invalid request";
+            }
+        } else if (query.contains("primes")) {
+            try {
+                List<String> args = List.of(query.split("primes:")[1].trim().split(","));
+                return args.stream()
+                        .map(String::trim)
+                        .map(Integer::parseInt)
+                        .filter(this::isPrime).findFirst().orElse(-1) + "";
+            } catch (Exception e) {
+                return "Invalid request: " + e.getMessage();
             }
         } else {
             return "";
