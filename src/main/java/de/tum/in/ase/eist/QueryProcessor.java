@@ -7,6 +7,13 @@ import java.util.List;
 @Service
 public class QueryProcessor {
 
+    private int fibo(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        return fibo(n-1) + fibo(n-2);
+    }
+
     public String process(String query) {
 		query = query.toLowerCase();
         if (query.contains("shakespeare")) {
@@ -72,6 +79,17 @@ public class QueryProcessor {
             }
         } else if (query.contains("banana")) {
             return "yellow";
+        } else if (query.contains("Eiffel tower")) {
+            return "paris";
+        } else if (query.contains("Fibonacci")) {
+            try {
+                List<String> args = List.of(query.split(" "));
+                int index = args.indexOf("number");
+                int num1 = Integer.parseInt(args.get(index-1).replace("th", ""));
+                return fibo(num1) + "";
+            } catch (Exception e) {
+                return "Invalid request";
+            }
         } else {
             return "";
         }
