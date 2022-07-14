@@ -16,12 +16,21 @@ public class QueryProcessor {
         } else if (query.contains("name")) {
            return "Mattia Leon";
         } else if (query.contains("plus")) {
-            List<String> args = List.of(query.split(" "));
-            int index = args.indexOf("plus");
             try {
+                List<String> args = List.of(query.split(" "));
+                int index = args.indexOf("plus");
                 int num1 = Integer.parseInt(args.get(index-1));
                 int num2 = Integer.parseInt(args.get(index+1));
                 return num1 + num2 + "";
+            } catch (Exception e) {
+                return "Invalid request";
+            }
+        } else if (query.contains("largest")) {
+            try {
+                List<String> args = List.of(query.split(":")[1].trim().split(", "));
+                return args.stream()
+                        .map(Integer::parseInt)
+                        .max(Integer::compareTo) + "";
             } catch (Exception e) {
                 return "Invalid request";
             }
