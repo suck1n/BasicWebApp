@@ -1,4 +1,4 @@
-# Extreme Startup
+# Extreme Startup 
 
 For this exercise we will use an automated build pipeline to deploy a simple web application. We will use GitHub Actions and Heroku, which should be easy to set up.
 
